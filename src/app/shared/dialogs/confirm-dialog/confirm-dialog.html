@@ -1,20 +1,70 @@
-<h2 mat-dialog-title>
-  <mat-icon color="warn">warning</mat-icon>
-  Confirmar acción
-</h2>
+<div class="confirm-dialog">
 
-<mat-dialog-content>
-  <p>{{ data.mensaje }}</p>
-</mat-dialog-content>
+  <!-- HEADER -->
 
-<mat-dialog-actions align="end">
+  <div class="dialog-header">
 
-  <button mat-button (click)="cancelar()">
-    Cancelar
-  </button>
+    <div class="icon-wrapper danger">
 
-  <button mat-raised-button color="warn" (click)="confirmar()">
-    Eliminar
-  </button>
+      <mat-icon>
+        warning
+      </mat-icon>
 
-</mat-dialog-actions>
+    </div>
+
+    <div class="title-content">
+
+      <h2 class="dialog-title">
+        Confirmar acción
+      </h2>
+
+      <p class="dialog-subtitle">
+        Esta acción no se puede deshacer
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <mat-dialog-content class="dialog-content">
+
+    <p class="message">
+      {{ data.mensaje }}
+    </p>
+
+  </mat-dialog-content>
+
+  <!-- ACTIONS -->
+
+  <mat-dialog-actions class="dialog-actions" align="end">
+
+    <button
+      mat-stroked-button
+      class="cancel-btn"
+      (click)="cancelar()"
+    >
+
+      Cancelar
+
+    </button>
+
+    <button
+      mat-flat-button
+      color="warn"
+      class="confirm-btn"
+      (click)="confirmar()"
+    >
+
+      <mat-icon>
+        delete
+      </mat-icon>
+
+      Eliminar
+
+    </button>
+
+  </mat-dialog-actions>
+
+</div>

@@ -1,41 +1,128 @@
-<mat-card class="form-card">
+<mat-card class="category-form-card">
 
   <!-- HEADER -->
-  <div class="form-header">
-    <h2>{{ modoEdicion ? 'Editar Categoría' : 'Nueva Categoría' }}</h2>
-    <p>Gestione la información de la categoría</p>
+
+  <div class="card-header">
+
+    <div class="title-section">
+
+      <div class="icon-wrapper">
+
+        <mat-icon>
+          category
+        </mat-icon>
+
+      </div>
+
+      <div>
+
+        <h2 class="form-title">
+
+          {{
+            modoEdicion
+              ? 'Editar Categoría'
+              : 'Nueva Categoría'
+          }}
+
+        </h2>
+
+        <p class="form-subtitle">
+          Gestiona la información de la categoría
+        </p>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
+  <!-- FORM -->
 
-    <!-- SECCIÓN -->
-    <div class="section">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="guardar()"
+    class="category-form"
+  >
 
-      <h3>Información básica</h3>
+    <!-- SECTION -->
+
+    <div class="form-section">
+
+      <div class="section-header">
+
+        <h3 class="section-title">
+          Información Básica
+        </h3>
+
+        <span class="section-badge">
+          Obligatorio
+        </span>
+
+      </div>
 
       <div class="form-grid">
 
         <!-- NOMBRE -->
+
         <mat-form-field appearance="outline">
-          <mat-label>Nombre</mat-label>
 
-          <input matInput formControlName="nombre">
+          <mat-label>
+            Nombre
+          </mat-label>
 
-          <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+          <mat-icon matPrefix>
+            label
+          </mat-icon>
+
+          <input
+            matInput
+            formControlName="nombre"
+            placeholder="Ingrese el nombre"
+          >
+
+          <mat-hint>
+            Ejemplo: Alimentos Premium
+          </mat-hint>
+
+          <mat-error
+            *ngIf="
+              form.get('nombre')?.touched &&
+              form.get('nombre')?.invalid
+            "
+          >
+
             El nombre es obligatorio
+
           </mat-error>
 
         </mat-form-field>
 
         <!-- DESCRIPCIÓN -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Descripción</mat-label>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+        >
+
+          <mat-label>
+            Descripción
+          </mat-label>
+
+          <mat-icon matPrefix>
+            notes
+          </mat-icon>
 
           <textarea
             matInput
-            rows="3"
-            formControlName="descripcion">
+            rows="4"
+            formControlName="descripcion"
+            placeholder="Ingrese una descripción"
+          >
           </textarea>
+
+          <mat-hint>
+            Información adicional de la categoría
+          </mat-hint>
 
         </mat-form-field>
 
@@ -43,16 +130,22 @@
 
     </div>
 
-    <!-- BOTONES -->
-    <div class="actions">
+    <!-- ACTIONS -->
+
+    <div class="form-actions">
 
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
         type="submit"
-        [disabled]="form.invalid">
+        class="save-btn"
+        [disabled]="form.invalid"
+      >
 
-        <mat-icon>save</mat-icon>
+        <mat-icon>
+          save
+        </mat-icon>
+
         Guardar
 
       </button>
@@ -60,7 +153,13 @@
       <button
         mat-stroked-button
         type="button"
-        (click)="cancelar()">
+        class="cancel-btn"
+        (click)="cancelar()"
+      >
+
+        <mat-icon>
+          close
+        </mat-icon>
 
         Cancelar
 

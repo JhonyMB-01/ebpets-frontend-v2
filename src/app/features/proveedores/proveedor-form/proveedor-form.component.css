@@ -1,17 +1,167 @@
-.form-card {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 24px;
+.provider-form-card {
+
+  background: var(--surface-primary);
+
+  color: var(--text-primary);
+
+  border-radius: var(--radius-lg);
+
+  padding: 2rem;
+
+  box-shadow: var(--shadow-primary);
+
+  border: 1px solid var(--border-color);
+
+  max-width: 1100px;
+
+  margin: 2rem auto;
 }
+
+/* HEADER */
+
+.card-header {
+
+  margin-bottom: 2rem;
+
+  padding-bottom: 1.5rem;
+
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title-section {
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icon {
+
+  width: 52px;
+  height: 52px;
+
+  font-size: 52px;
+
+  color: var(--brand-primary);
+}
+
+.form-title {
+
+  margin: 0;
+
+  font-size: 1.6rem;
+
+  font-weight: 700;
+}
+
+.form-subtitle {
+
+  margin: 0.3rem 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 0.95rem;
+}
+
+/* FORM */
+
+.provider-form {
+  width: 100%;
+}
+
+/* GRID */
 
 .form-grid {
+
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 1.5rem;
 }
 
-.actions {
-  margin-top: 24px;
+/* MATERIAL FIELD */
+
+mat-form-field {
+
+  width: 100%;
+}
+
+/* INPUT ICON */
+
+.mat-mdc-form-field-icon-prefix {
+
+  color: var(--text-secondary);
+}
+
+/* ACTIONS */
+
+.form-actions {
+
   display: flex;
-  gap: 16px;
+
+  justify-content: flex-end;
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--border-color);
+}
+
+/* BUTTONS */
+
+.save-btn,
+.cancel-btn {
+
+  height: 44px;
+
+  padding: 0 1.2rem;
+
+  border-radius: 10px;
+
+  font-weight: 600;
+
+  transition: var(--transition);
+}
+
+.save-btn:hover,
+.cancel-btn:hover {
+
+  transform: translateY(-2px);
+}
+
+/* SAVE */
+
+.save-btn {
+
+  box-shadow:
+    0 6px 16px rgba(37,99,235,0.35);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+  .provider-form-card {
+
+    padding: 1.2rem;
+
+    margin: 1rem;
+  }
+
+  .form-actions {
+
+    flex-direction: column;
+  }
+
+  .save-btn,
+  .cancel-btn {
+
+    width: 100%;
+  }
+
 }

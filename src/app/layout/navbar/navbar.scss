@@ -1,14 +1,83 @@
 .navbar {
+
+  height: 70px;
+  padding: 0 1.2rem;
+
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  background: var(--surface-primary);
+  color: var(--text-primary);
+
+  border-bottom: 1px solid var(--border-color);
+
+  box-shadow: var(--shadow-primary);
 }
 
-.title {
-  margin-left: 8px;
-  font-weight: 600;
+/* Brand */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
+
+.brand-icon {
+  color: var(--brand-primary);
+}
+
+.brand-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Spacer */
 
 .spacer {
-  flex: 1 1 auto;
+  flex: 1;
+}
+
+/* User */
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.role {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.profile-btn,
+.logout-btn {
+
+  color: var(--text-primary);
+
+  transition: var(--transition);
+
+  border-radius: 50%;
+}
+
+.profile-btn:hover,
+.logout-btn:hover {
+
+  background: var(--surface-hover);
+
+  transform: scale(1.05);
 }

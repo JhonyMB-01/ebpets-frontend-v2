@@ -1,43 +1,141 @@
-<mat-card class="form-card">
+<mat-card class="provider-form-card">
 
-  <h2>
-    {{ modoEdicion ? 'Editar Proveedor' : 'Nuevo Proveedor' }}
-  </h2>
+  <!-- Header -->
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
+  <div class="card-header">
 
-    <div class="form-grid">
+    <div class="title-section">
 
-      <mat-form-field appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre">
-      </mat-form-field>
+      <mat-icon class="header-icon">
+        business
+      </mat-icon>
 
-      <mat-form-field appearance="outline">
-          <mat-label>Ruc</mat-label>
-          <input matInput formControlName="ruc">
-      </mat-form-field>
+      <div>
+        <h2 class="form-title">
+          {{ modoEdicion ? 'Editar Proveedor' : 'Nuevo Proveedor' }}
+        </h2>
 
-      <mat-form-field appearance="outline">
-          <mat-label>Teléfono</mat-label>
-          <input matInput formControlName="telefono">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-          <mat-label>Correo Electrónico</mat-label>
-          <input matInput formControlName="email" type="email">
-      </mat-form-field>
-
+        <p class="form-subtitle">
+          Completa la información del proveedor
+        </p>
+      </div>
 
     </div>
 
-    <div class="actions">
-      <button mat-raised-button color="primary" type="submit">
+  </div>
+
+  <!-- Form -->
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="guardar()"
+    class="provider-form"
+  >
+
+    <div class="form-grid">
+
+      <!-- Nombre -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+
+        <mat-icon matPrefix>
+          badge
+        </mat-icon>
+
+        <input
+          matInput
+          formControlName="nombre"
+          placeholder="Ingrese el nombre"
+        >
+      </mat-form-field>
+
+      <!-- RUC -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>RUC</mat-label>
+
+        <mat-icon matPrefix>
+          receipt_long
+        </mat-icon>
+
+        <input
+          matInput
+          formControlName="ruc"
+          placeholder="Ingrese el RUC"
+        >
+
+      </mat-form-field>
+
+      <!-- Teléfono -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Teléfono</mat-label>
+
+        <mat-icon matPrefix>
+          phone
+        </mat-icon>
+
+        <input
+          matInput
+          formControlName="telefono"
+          placeholder="Ingrese el teléfono"
+        >
+
+      </mat-form-field>
+
+      <!-- Correo -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Correo Electrónico</mat-label>
+
+        <mat-icon matPrefix>
+          email
+        </mat-icon>
+
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          placeholder="correo@empresa.com"
+        >
+
+      </mat-form-field>
+
+    </div>
+
+    <!-- Actions -->
+
+    <div class="form-actions">
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        class="save-btn"
+         [disabled]="form.invalid"
+      >
+
+        <mat-icon>save</mat-icon>
         Guardar
+
       </button>
-      <button mat-stroked-button type="button" (click)="cancelar()">
+
+      <button
+        mat-stroked-button
+        type="button"
+        class="cancel-btn"
+        (click)="cancelar()"
+      >
+
+        <mat-icon>close</mat-icon>
         Cancelar
+
       </button>
+
     </div>
 
   </form>

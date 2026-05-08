@@ -1,8 +1,139 @@
-mat-dialog-content {
-  margin-top: 8px;
+.confirm-dialog {
+
+  padding: 1.5rem;
+
+  color: var(--text-primary);
 }
 
-mat-icon {
-  vertical-align: middle;
-  margin-right: 8px;
+/* HEADER */
+
+.dialog-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+}
+
+/* ICON */
+
+.icon-wrapper {
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(248,113,113,0.15);
+
+  color: #f87171;
+}
+
+.icon-wrapper mat-icon {
+
+  font-size: 26px;
+}
+
+/* TITLE */
+
+.title-content {
+
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-title {
+
+  margin: 0;
+
+  font-size: 1.25rem;
+
+  font-weight: 700;
+}
+
+.dialog-subtitle {
+
+  margin: 0;
+
+  font-size: 0.85rem;
+
+  color: var(--text-secondary);
+}
+
+/* CONTENT */
+
+.dialog-content {
+
+  margin: 1rem 0;
+}
+
+.message {
+
+  font-size: 0.95rem;
+
+  color: var(--text-primary);
+
+  line-height: 1.5;
+}
+
+/* ACTIONS */
+
+.dialog-actions {
+
+  padding-top: 1rem;
+
+  border-top: 1px solid var(--border-color);
+
+  display: flex;
+
+  gap: 0.75rem;
+}
+
+/* BUTTONS */
+
+.cancel-btn {
+
+  border-radius: 10px;
+
+  font-weight: 600;
+}
+
+.confirm-btn {
+
+  border-radius: 10px;
+
+  font-weight: 600;
+
+  box-shadow: 0 6px 16px rgba(248,113,113,0.25);
+
+  transition: var(--transition);
+}
+
+.confirm-btn:hover {
+
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 480px) {
+
+  .dialog-actions {
+
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .confirm-btn {
+
+    width: 100%;
+  }
+
 }

@@ -1,48 +1,216 @@
-<div class="page">
+<div class="brands-page">
 
-  <div class="header">
-    <h1>Marcas</h1>
+  <!-- HEADER -->
 
-    <button mat-raised-button color="primary" (click)="nuevo()">
-      <mat-icon>add</mat-icon>
+  <div class="page-header">
+
+    <div class="title-section">
+
+      <h1 class="page-title">
+        Marcas
+      </h1>
+
+      <p class="page-subtitle">
+        Gestiona las marcas registradas
+      </p>
+
+    </div>
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="new-brand-btn"
+      (click)="nuevo()"
+    >
+
+      <mat-icon>
+        add
+      </mat-icon>
+
       Nueva Marca
+
     </button>
-  </div>
-  
-  <div *ngIf="loading" class="loading">
-    Cargando marcas...
+
   </div>
 
-  <!-- TABLA -->
-  <mat-card *ngIf="!loading">
+  <!-- LOADING -->
 
-    <table mat-table [dataSource]="dataSource">
+  <div
+    *ngIf="loading"
+    class="loading-state"
+  >
 
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let c">{{ c.nombre }}</td>
-      </ng-container>
+    <mat-spinner diameter="40"></mat-spinner>
 
-      <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones</th>
-        <td mat-cell *matCellDef="let c">
+    <span>
+      Cargando marcas...
+    </span>
 
-          <button mat-icon-button (click)="editar(c)">
-            <mat-icon>edit</mat-icon>
-          </button>
+  </div>
 
-          <button mat-icon-button color="warn" (click)="eliminar(c)">
-            <mat-icon>delete</mat-icon>
-          </button>
+  <!-- TABLE -->
 
-        </td>
-      </ng-container>
+  <mat-card
+    *ngIf="!loading"
+    class="table-card"
+  >
 
-       <!-- FILAS -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- TOOLBAR 
 
-    </table>
+    <div class="table-toolbar">
+
+      <mat-form-field
+        appearance="outline"
+        class="search-field"
+      >
+
+        <mat-label>
+          Buscar marca
+        </mat-label>
+
+        <mat-icon matPrefix>
+          search
+        </mat-icon>
+
+        <input
+          matInput
+          placeholder="Ingrese el nombre"
+        >
+
+      </mat-form-field>
+
+    </div>-->
+
+    <!-- TABLE -->
+
+    <div class="table-wrapper">
+
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="brands-table"
+      >
+
+        <!-- NOMBRE -->
+
+        <ng-container matColumnDef="nombre">
+
+          <th mat-header-cell *matHeaderCellDef>
+            Marca
+          </th>
+
+          <td mat-cell *matCellDef="let c">
+
+            <div class="brand-cell">
+
+              <div class="brand-avatar">
+
+                {{ c.nombre.charAt(0) }}
+
+              </div>
+
+              <div class="brand-info">
+
+                <span class="brand-name">
+                  {{ c.nombre }}
+                </span>
+
+                <span class="brand-description">
+                  Marca registrada
+                </span>
+
+              </div>
+
+            </div>
+
+          </td>
+
+        </ng-container>
+
+        <!-- ACCIONES -->
+
+        <ng-container matColumnDef="acciones">
+
+          <th mat-header-cell *matHeaderCellDef>
+            Acciones
+          </th>
+
+          <td mat-cell *matCellDef="let c">
+
+            <div class="actions-container">
+
+              <!-- EDIT -->
+
+              <button
+                mat-icon-button
+                class="action-btn edit-btn"
+                matTooltip="Editar marca"
+                (click)="editar(c)"
+              >
+
+                <mat-icon>
+                  edit
+                </mat-icon>
+
+              </button>
+
+              <!-- DELETE -->
+
+              <button
+                mat-icon-button
+                class="action-btn delete-btn"
+                matTooltip="Eliminar marca"
+                (click)="eliminar(c)"
+              >
+
+                <mat-icon>
+                  delete
+                </mat-icon>
+
+              </button>
+
+            </div>
+
+          </td>
+
+        </ng-container>
+
+        <!-- ROWS -->
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns"
+        ></tr>
+
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns;"
+        ></tr>
+
+      </table>
+
+      <!-- EMPTY STATE -->
+
+      <div
+        *ngIf="dataSource.data.length === 0"
+        class="empty-state"
+      >
+
+        <mat-icon>
+          storefront
+        </mat-icon>
+
+        <h3>
+          No hay marcas registradas
+        </h3>
+
+        <p>
+          Agrega tu primera marca para comenzar
+        </p>
+
+      </div>
+
+    </div>
 
   </mat-card>
 

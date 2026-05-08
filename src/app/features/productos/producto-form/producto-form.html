@@ -1,63 +1,256 @@
-<mat-card class="form-card">
+<mat-card class="product-form-card">
 
-  <h2>
-    {{ modoEdicion ? 'Editar Producto' : 'Nuevo Producto' }}
-  </h2>
+  <!-- HEADER -->
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
+  <div class="card-header">
 
-    <div class="form-grid">
+    <div class="title-section">
 
-      <mat-form-field appearance="outline">
-        <mat-label>Código</mat-label>
-        <input matInput formControlName="codigo">
-      </mat-form-field>
+      <div class="icon-wrapper">
 
-      <mat-form-field appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre">
-      </mat-form-field>
+        <mat-icon>
+          inventory_2
+        </mat-icon>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Categoría</mat-label>
-        <mat-select formControlName="categoriaId">
-          <mat-option *ngFor="let c of categorias" [value]="c.id">
-            {{ c.nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      </div>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Marca</mat-label>
-        <mat-select formControlName="marcaId">
-          <mat-option *ngFor="let m of marcas" [value]="m.id">
-            {{ m.nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Precio venta</mat-label>
-        <input matInput type="number" formControlName="precioVenta">
-      </mat-form-field>
+        <h2 class="form-title">
+          {{ modoEdicion ? 'Editar Producto' : 'Nuevo Producto' }}
+        </h2>
 
-      <mat-slide-toggle formControlName="afectaIgv">
-        Afecta IGV
-      </mat-slide-toggle>
+        <p class="form-subtitle">
+          Gestiona la información del producto
+        </p>
 
-      <mat-slide-toggle formControlName="activo">
-        Activo
-      </mat-slide-toggle>
+      </div>
 
     </div>
 
-    <div class="actions">
-      <button mat-raised-button color="primary" type="submit">
+  </div>
+
+  <!-- FORM -->
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="guardar()"
+    class="product-form"
+  >
+
+    <!-- SECTION -->
+    <div class="form-section">
+
+      <h3 class="section-title">
+        Información General
+      </h3>
+
+      <div class="form-grid">
+
+        <!-- CODIGO -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Código</mat-label>
+
+          <mat-icon matPrefix>
+            qr_code
+          </mat-icon>
+
+          <input
+            matInput
+            formControlName="codigo"
+            placeholder="PRD-001"
+          >
+
+        </mat-form-field>
+
+        <!-- NOMBRE -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Nombre</mat-label>
+
+          <mat-icon matPrefix>
+            sell
+          </mat-icon>
+
+          <input
+            matInput
+            formControlName="nombre"
+            placeholder="Ingrese el nombre"
+          >
+
+        </mat-form-field>
+
+        <!-- CATEGORIA -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Categoría</mat-label>
+
+          <mat-icon matPrefix>
+            category
+          </mat-icon>
+
+          <mat-select formControlName="categoriaId">
+
+            <mat-option
+              *ngFor="let c of categorias"
+              [value]="c.id"
+            >
+              {{ c.nombre }}
+            </mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+
+        <!-- MARCA -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Marca</mat-label>
+
+          <mat-icon matPrefix>
+            storefront
+          </mat-icon>
+
+          <mat-select formControlName="marcaId">
+
+            <mat-option
+              *ngFor="let m of marcas"
+              [value]="m.id"
+            >
+              {{ m.nombre }}
+            </mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+
+        <!-- PRECIO -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Precio Venta</mat-label>
+
+          <span matTextPrefix>S/ &nbsp;</span>
+
+          <mat-icon matPrefix>
+            payments
+          </mat-icon>
+
+          <input
+            matInput
+            type="number"
+            formControlName="precioVenta"
+            placeholder="0.00"
+          >
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <!-- SECTION -->
+
+    <div class="form-section">
+
+      <h3 class="section-title">
+        Configuración
+      </h3>
+
+      <div class="toggles-grid">
+
+        <!-- IGV -->
+
+        <div class="toggle-card">
+
+          <div class="toggle-info">
+
+            <span class="toggle-title">
+              Afecta IGV
+            </span>
+
+            <span class="toggle-description">
+              El producto aplica impuesto IGV
+            </span>
+
+          </div>
+
+          <mat-slide-toggle
+            color="primary"
+            formControlName="afectaIgv"
+          >
+          </mat-slide-toggle>
+
+        </div>
+
+        <!-- ACTIVO -->
+
+        <div class="toggle-card">
+
+          <div class="toggle-info">
+
+            <span class="toggle-title">
+              Producto Activo
+            </span>
+
+            <span class="toggle-description">
+              Visible y disponible en el sistema
+            </span>
+
+          </div>
+
+          <mat-slide-toggle
+            color="primary"
+            formControlName="activo"
+          >
+          </mat-slide-toggle>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        class="save-btn"
+        [disabled]="form.invalid"
+      >
+
+        <mat-icon>
+          save
+        </mat-icon>
+
         Guardar
+
       </button>
-      <button mat-stroked-button type="button" (click)="cancelar()">
+
+      <button
+        mat-stroked-button
+        type="button"
+        class="cancel-btn"
+        (click)="cancelar()"
+      >
+
+        <mat-icon>
+          close
+        </mat-icon>
+
         Cancelar
+
       </button>
+
     </div>
 
   </form>

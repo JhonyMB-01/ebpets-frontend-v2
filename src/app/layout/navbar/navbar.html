@@ -1,15 +1,52 @@
-<mat-toolbar color="primary" class="navbar">
+<mat-toolbar class="navbar">
 
-  <span class="title">EBPETS</span>
+  <!-- Brand -->
+  <div class="brand">
+
+    <mat-icon class="brand-icon">
+      pets
+    </mat-icon>
+
+    <span class="brand-title">
+      EBPETS
+    </span>
+
+  </div>
 
   <span class="spacer"></span>
 
-  <span class="user-info">
-    {{ username }} ({{ role }})
-  </span>
+  <!-- User -->
+  <div class="user-section">
 
-  <button mat-icon-button color="warn" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
+    <div class="user-info">
+
+      <span class="username">
+        {{ username }}
+      </span>
+
+      <span class="role">
+        {{ role }}
+      </span>
+
+    </div>
+
+    <button
+      mat-icon-button
+      class="profile-btn">
+
+      <mat-icon>account_circle</mat-icon>
+
+    </button>
+
+    <button
+      mat-icon-button
+      class="logout-btn"
+      (click)="logout()">
+
+      <mat-icon>logout</mat-icon>
+
+    </button>
+
+  </div>
 
 </mat-toolbar>
