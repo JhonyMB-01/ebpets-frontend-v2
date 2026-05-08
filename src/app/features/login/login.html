@@ -1,0 +1,59 @@
+<div class="login-wrapper">
+
+  <mat-card class="login-card">
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <img
+        src="/logo.png"
+        alt="EBPETS"
+        class="logo"
+      />
+    </div>
+
+    <!-- Titles -->
+    <h1 class="title">Bienvenido</h1>
+    <p class="subtitle">Sistema de Gestión EBPETS</p>
+
+    <form [formGroup]="form" (ngSubmit)="login()">
+
+      <!-- Usuario -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput formControlName="username" autocomplete="username">
+      </mat-form-field>
+
+      <!-- Contraseña -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          autocomplete="current-password"
+        />
+      </mat-form-field>
+
+      <!-- Botón -->
+      <button
+        mat-raised-button
+        color="primary"
+        class="login-button"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        INICIAR SESIÓN
+      </button>
+
+    </form>
+
+    <!-- Footer -->
+    <div class="footer">
+      <span>v1.0 • © 2026 EBPETS</span>
+    </div>
+
+  </mat-card>
+
+</div>

@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="navbar">
+
+  <span class="title">EBPETS</span>
+
+  <span class="spacer"></span>
+
+  <span class="user-info">
+    {{ username }} ({{ role }})
+  </span>
+
+  <button mat-icon-button color="warn" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+</mat-toolbar>

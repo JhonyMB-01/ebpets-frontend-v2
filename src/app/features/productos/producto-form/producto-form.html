@@ -1,0 +1,65 @@
+<mat-card class="form-card">
+
+  <h2>
+    {{ modoEdicion ? 'Editar Producto' : 'Nuevo Producto' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+    <div class="form-grid">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="codigo">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="categoriaId">
+          <mat-option *ngFor="let c of categorias" [value]="c.id">
+            {{ c.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Marca</mat-label>
+        <mat-select formControlName="marcaId">
+          <mat-option *ngFor="let m of marcas" [value]="m.id">
+            {{ m.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Precio venta</mat-label>
+        <input matInput type="number" formControlName="precioVenta">
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="afectaIgv">
+        Afecta IGV
+      </mat-slide-toggle>
+
+      <mat-slide-toggle formControlName="activo">
+        Activo
+      </mat-slide-toggle>
+
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit">
+        Guardar
+      </button>
+      <button mat-stroked-button type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+
+  </form>
+
+</mat-card>

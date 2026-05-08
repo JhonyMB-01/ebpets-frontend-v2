@@ -1,0 +1,34 @@
+.metric-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.metric-icon {
+  font-size: 40px;
+  opacity: 0.8;
+}
+
+.metric-label {
+  font-size: 14px;
+  color: rgba(0,0,0,0.6);
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.primary {
+  background-color: #e8eaf6;
+}
+
+.warn {
+  background-color: #fdecea;
+}
+
+.accent {
+  background-color: #e0f2f1;
+}

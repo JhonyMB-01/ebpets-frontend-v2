@@ -1,0 +1,35 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-card {
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.activo {
+  color: green;
+  font-weight: 600;
+}
+
+.inactivo {
+  color: red;
+  font-weight: 600;
+}

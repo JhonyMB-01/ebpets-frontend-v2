@@ -1,0 +1,20 @@
+.layout-container {
+  height: 100vh; /* 🔥 CRÍTICO */
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 🔥 CLAVE */
+.content {
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+}

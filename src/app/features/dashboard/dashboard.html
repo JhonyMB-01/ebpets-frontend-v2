@@ -1,0 +1,15 @@
+<div class="dashboard">
+
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Resumen general del sistema</p>
+  </header>
+
+  <section class="metrics-grid">
+    <app-metric-card
+      *ngFor="let metric of metrics"
+      [metric]="metric">
+    </app-metric-card>
+  </section>
+
+</div>

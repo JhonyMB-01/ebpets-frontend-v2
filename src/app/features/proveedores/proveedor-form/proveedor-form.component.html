@@ -1,0 +1,45 @@
+<mat-card class="form-card">
+
+  <h2>
+    {{ modoEdicion ? 'Editar Proveedor' : 'Nuevo Proveedor' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+    <div class="form-grid">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Ruc</mat-label>
+          <input matInput formControlName="ruc">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Correo Electrónico</mat-label>
+          <input matInput formControlName="email" type="email">
+      </mat-form-field>
+
+
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit">
+        Guardar
+      </button>
+      <button mat-stroked-button type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+
+  </form>
+
+</mat-card>
