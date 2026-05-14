@@ -1,0 +1,90 @@
+.compras-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* HEADER */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.page-subtitle {
+  margin: 4px 0 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* BOTÓN */
+.new-btn {
+  display: flex;
+  gap: 6px;
+}
+
+/* LOADING */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+/* CARD */
+.table-card {
+  border-radius: 16px;
+  padding: 12px;
+}
+
+/* TABLA */
+.compras-table {
+  width: 100%;
+}
+
+/* CELDA PROVEEDOR */
+.proveedor-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background: #3f51b5;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* COMPRA ID */
+.compra-code {
+  font-weight: 600;
+  color: #3f51b5;
+}
+
+/* TOTAL */
+.total {
+  font-weight: 600;
+  color: #388e3c;
+}
+
+/* ACCIONES */
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* EMPTY */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: rgba(0, 0, 0, 0.6);
+}

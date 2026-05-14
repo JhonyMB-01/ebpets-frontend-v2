@@ -96,7 +96,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/proveedores/proveedor-form/proveedor-form.component')
             .then(m => m.ProveedorFormComponent)
+      },
+      {
+        path: 'compras',
+        loadComponent: () =>
+          import('./features/compras/compra-list/compra-list.component')
+            .then(m => m.CompraListComponent)
       }
+
 
     ]
     }

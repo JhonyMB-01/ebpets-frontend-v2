@@ -6,6 +6,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { ProductoService } from '../producto.service';
 import { Producto, Categoria, Marca } from '../../../core/models/producto.model';
+import { MarcaService } from '../../marcas/marca.service';
+import { CategoriaService } from '../../categorias/categoria.service';
+
 
 @Component({
   selector: 'app-producto-form',
@@ -25,6 +28,10 @@ export class ProductoFormComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private productoService = inject(ProductoService);
 
+  private marcaService = inject(MarcaService);
+  private categoriaService = inject(CategoriaService);
+
+
   modoEdicion = false;
   productoId!: number;
 
@@ -43,33 +50,46 @@ export class ProductoFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.cargarCatalogos();
-
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
       this.modoEdicion = true;
       this.productoId = +id;
-      this.cargarProducto();
+      //this.cargarProducto();
     }
+
+    this.cargarCatalogos();
 
   }
 
   cargarCatalogos(): void {
-    // 🔹 Temporal (mock)
-    this.categorias = [
-      { id: 1, nombre: 'Alimentos' },
-      { id: 2, nombre: 'Medicina' }
-    ];
 
-    this.marcas = [
-      { id: 1, nombre: 'Pedigree' },
-      { id: 2, nombre: 'Purina' }
-    ];
+    this.categoriaService.getCategorias().subscribe({
+      next: (categorias) => {
+        // ✅ forzar nueva referencia (CRÍTICO)
+        this.categorias = [...categorias];
+      },
+      error: (err) => console.error('Error cargando categorías', err)
+    });
+
+    this.marcaService.getMarcas().subscribe({
+      next: (marcas) => {
+        // ✅ forzar nueva referencia
+        this.marcas = [...marcas];
+
+        // ✅ SOLO AQUÍ cargar producto
+        if (this.modoEdicion) {
+          this.cargarProducto();
+        }
+
+      },
+      error: (err) => console.error('Error cargando marcas', err)
+    });
+
   }
 
   cargarProducto(): void {
-
+    console.log('Cargando producto con ID:', this.productoId);
     this.productoService.getProductoById(this.productoId)
       .subscribe({
         next: (producto: Producto) => {

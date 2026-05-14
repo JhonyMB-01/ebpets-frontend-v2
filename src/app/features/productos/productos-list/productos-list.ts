@@ -30,7 +30,9 @@ export class ProductosListComponent implements OnInit {
     'marca',
     'precioVenta',
     'activo',
+    'afectaIgv',
     'acciones'
+    
   ];
 
   dataSource = new MatTableDataSource<Producto>([]);
