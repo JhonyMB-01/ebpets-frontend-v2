@@ -9,13 +9,11 @@ import { CompraService } from '../compra.service';
 import { CompraDetalle } from '../../../core/models/compra.model';
 
 
-
 @Component({
   selector: 'app-compra-detail-dialog',
-  standalone: true,
   imports: [CommonModule, MatDialogModule, MaterialModule],
   templateUrl: './compra-detail-dialog.component.html',
-  styleUrl: './compra-detail-dialog.component.css'
+  styleUrls: ['./compra-detail-dialog.component.css']
 })
 export class CompraDetailDialogComponent implements OnInit{
   
@@ -40,10 +38,6 @@ private service = inject(CompraService);
 
 
   ngOnInit(): void {
-    /*this.service.getCompraById(this.data.id).subscribe(res => {
-      this.compra = res;
-      this.loading = false;
-    });*/
      this.cargarDetalle();
   }
 
@@ -58,7 +52,7 @@ private service = inject(CompraService);
 
         console.log('Detalle compra:', res);
 
-        // 🔥 forzar referencia nueva (evita bugs Angular)
+        // forzar referencia nueva (evita bugs Angular)
         this.compra = { ...res };
 
         this.loading = false;
@@ -69,6 +63,7 @@ private service = inject(CompraService);
       }
     });
   }
+
 
 
 

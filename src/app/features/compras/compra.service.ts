@@ -21,6 +21,7 @@ export class CompraService {
   }
 
   crearCompra(data: any) {
+    console.log('Enviando datos al backend:', data);
     return this.http.post(this.API_URL, data);
   }
 

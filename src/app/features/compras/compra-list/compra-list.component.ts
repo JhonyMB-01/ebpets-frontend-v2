@@ -64,10 +64,14 @@ cargar() {
   verDetalle(id: number) {
     console.log('Ver detalle de compra con ID:', id);
     this.dialog.open(CompraDetailDialogComponent, {
-      width: '800px',
+      width: '80%',             // ancho relativo
+      maxWidth: '1200px',       // límite máximo
+      height: '80%',            // altura relativa
       data: { id }
     });
   }
+
+ 
 
 
 }

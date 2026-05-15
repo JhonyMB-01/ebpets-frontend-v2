@@ -1,0 +1,45 @@
+.compra-form {
+  padding: 20px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.form-card {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.item-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) auto; /* 5 campos + botón */
+  gap: 16px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.item-row button {
+  margin-top: 8px;
+}
+
+.mat-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.mat-header-cell, .mat-cell {
+  padding: 8px 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}

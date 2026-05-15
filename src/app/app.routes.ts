@@ -102,7 +102,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/compras/compra-list/compra-list.component')
             .then(m => m.CompraListComponent)
-      }
+      },
+      {
+        path: 'compras/nuevo',
+        loadComponent: () =>
+          import('./features/compras/compra-form/compra-form.component')
+            .then(m => m.CompraFormComponent)
+      },
 
 
     ]
