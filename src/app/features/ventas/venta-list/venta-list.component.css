@@ -1,0 +1,72 @@
+.ventas-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* HEADER */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: rgba(0,0,0,0.6);
+}
+
+/* TABLA */
+.table-card {
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.ventas-table {
+  width: 100%;
+}
+
+/* TOTAL */
+.total {
+  font-weight: 600;
+  color: #388e3c;
+}
+
+/* ESTADO */
+.estado {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* COLORES */
+.estado.PENDIENTE {
+  background: #fff4e5;
+  color: #f57c00;
+}
+
+.estado.PAGADO {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.estado.CANCELADO {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  padding: 20px;
+  color: rgba(0,0,0,0.6);
+}

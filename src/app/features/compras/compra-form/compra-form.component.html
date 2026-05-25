@@ -103,7 +103,12 @@
     <!-- ACCIONES -->
     <div class="actions">
       <button mat-stroked-button (click)="cancelar()">Cancelar</button>
-      <button mat-flat-button color="primary" (click)="guardar()">Guardar Compra</button>
+      <button mat-flat-button 
+              color="primary" 
+              (click)="guardar()"
+              [disabled]="compraForm.invalid || itemsFormArray.length === 0">
+              Guardar Compra
+      </button>
     </div>
 
   </mat-card>

@@ -109,6 +109,17 @@ export const routes: Routes = [
           import('./features/compras/compra-form/compra-form.component')
             .then(m => m.CompraFormComponent)
       },
+      {
+        path: 'ventas',
+        loadComponent: () =>
+          import('./features/ventas/venta-list/venta-list.component')
+            .then(m => m.VentaListComponent)
+      },
+      {path: 'ventas/nuevo',
+        loadComponent: () =>
+          import('./features/ventas/venta-form/venta-form.component')
+            .then(m => m.VentaFormComponent)
+      }
 
 
     ]

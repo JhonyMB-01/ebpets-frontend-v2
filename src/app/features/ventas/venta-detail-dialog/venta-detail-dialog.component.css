@@ -1,0 +1,188 @@
+.detalle-page {
+  padding: 20px;
+}
+
+/* HEADER */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 16px;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-wrapper mat-icon {
+  font-size: 40px;
+  color: #3f51b5;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.page-subtitle {
+  margin: 0;
+  color: #666;
+}
+
+/* SUMMARY */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+}
+
+.summary-icon mat-icon {
+  font-size: 32px;
+  color: #3f51b5;
+}
+
+.summary-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.summary-value {
+  font-size: 1.1rem;
+}
+
+.summary-total {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+/* ESTADOS */
+.estado {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.estado.completado {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.estado.pendiente {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.estado.cancelado {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* TABLE */
+.table-section {
+  margin-top: 24px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.items-counter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #777;
+}
+
+.empty-state mat-icon {
+  font-size: 48px;
+  color: #ccc;
+}
+
+.detail-table {
+  width: 100%;
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-icon {
+  color: #3f51b5;
+}
+
+.quantity-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.price {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.chip {
+  background: #f5f5f5;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+/* TOTALES */
+.totales {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.total-final {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.totales {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.totales div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total-final {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2e7d32;
+}
