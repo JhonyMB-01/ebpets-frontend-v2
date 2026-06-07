@@ -1,1 +1,376 @@
-<p>venta-form works!</p>
+<form [formGroup]="form">
+
+  <div class="venta-layout">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div>
+
+      <!-- CLIENTE -->
+      <mat-card>
+
+        <mat-card-header>
+          <mat-card-title>
+            Nueva Venta
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <mat-form-field appearance="outline" class="full-width">
+
+            <mat-label>Cliente</mat-label>
+
+            <mat-select formControlName="idCliente">
+
+              <mat-option
+                *ngFor="let c of clientes"
+                [value]="c.id">
+
+                {{ c.nombre }}
+
+              </mat-option>
+
+            </mat-select>
+
+          </mat-form-field>
+
+          <!-- PAGO -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Método de Pago</mat-label>
+          <mat-select formControlName="metodoPago">
+            <mat-option value="EFECTIVO">Efectivo</mat-option>
+            <mat-option value="YAPE">Yape</mat-option>
+            <mat-option value="PLIN">Plin</mat-option>
+            <mat-option value="TARJETA">Tarjeta</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- ESTADO -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estadoVenta">
+            <mat-option value="PAGADO">Pagado</mat-option>
+            <mat-option value="PENDIENTE">Pendiente</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <!-- PRODUCTOS -->
+      <mat-card class="mt">
+
+        <mat-card-header>
+          <mat-card-title>
+            Agregar Producto
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <!-- BUSCADOR -->
+          <mat-form-field
+            appearance="outline"
+            class="full-width">
+
+            <mat-label>
+              Buscar producto
+            </mat-label>
+
+            <input
+              matInput
+              placeholder="Ingrese nombre del producto"
+              (input)="buscarProducto($event)">
+
+          </mat-form-field>
+
+          <!-- AUTOCOMPLETE -->
+          <div
+            class="autocomplete"
+            *ngIf="filteredProductos.length > 0">
+
+            <div
+              *ngFor="let p of filteredProductos"
+              class="autocomplete-item"
+              (click)="seleccionarProducto(p)">
+
+              {{ p.nombre }}
+
+            </div>
+
+          </div>
+
+          <!-- PRODUCTO SELECCIONADO -->
+          <div
+            class="producto-info"
+            *ngIf="productoSeleccionado">
+
+            <strong>
+              {{ productoSeleccionado.nombre }}
+            </strong>
+
+          </div>
+
+          <!-- DATOS DEL ITEM -->
+          <div class="item-grid">
+
+            <!-- LOTE -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Lote</mat-label>
+
+              <mat-select
+                formControlName="idInventario"
+                (selectionChange)="seleccionarInventario()">
+
+                <mat-option
+                  *ngFor="let inv of inventarios"
+                  [value]="inv.id">
+
+                  {{ inv.lote }} - Stock: {{ inv.stock }}
+
+                </mat-option>
+
+              </mat-select>
+
+            </mat-form-field>
+
+            <!-- CANTIDAD -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Cantidad</mat-label>
+
+              <input
+                matInput
+                type="number"
+                min="1"
+                formControlName="cantidad"
+                (input)="validarStock()">
+
+            </mat-form-field>
+
+            <!-- PRECIO -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Precio</mat-label>
+
+              <input
+                matInput
+                type="number"
+                min="0"
+                formControlName="precioUnitario">
+
+            </mat-form-field>
+
+            <!-- DESCUENTO -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Descuento</mat-label>
+
+              <input
+                matInput
+                type="number"
+                min="0"
+                formControlName="descuento">
+
+            </mat-form-field>
+
+          </div>
+
+          <!-- STOCK -->
+          <div class="stock-info">
+
+            <strong>
+              Stock disponible:
+            </strong>
+
+            {{ stockDisponible }}
+
+            <span
+              class="error"
+              *ngIf="!stockValido">
+
+              Stock insuficiente
+
+            </span>
+
+          </div>
+
+          <!-- TOTAL ITEM -->
+          <div class="total-item">
+
+            <span>Total Item</span>
+
+            <h2>
+              S/ {{ totalItem | number:'1.2-2' }}
+            </h2>
+
+          </div>
+
+          <!-- BOTON -->
+          <button
+            type="button"
+            mat-flat-button
+            color="primary"
+            [disabled]="!stockValido"
+            (click)="agregarItem()">
+
+            Agregar Producto
+
+          </button>
+
+        </mat-card-content>
+
+      </mat-card>
+
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div>
+
+      <!-- ITEMS -->
+      <mat-card>
+
+        <mat-card-header>
+          <mat-card-title>
+            Productos Agregados
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <table class="table">
+
+            <thead>
+
+              <tr>
+                <th>Producto</th>
+                <th>Lote</th>
+                <th>Cant.</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr *ngIf="items.length === 0">
+
+                <td colspan="5" class="empty">
+
+                  No existen productos agregados
+
+                </td>
+
+              </tr>
+
+              <tr
+                *ngFor="let item of items; let i = index">
+
+                <td>
+                  {{ item.producto }}
+                </td>
+
+                <td>
+                  {{ item.lote }}
+                </td>
+
+                <td>
+                  {{ item.cantidad }}
+                </td>
+
+                <td>
+                  S/ {{ item.total | number:'1.2-2' }}
+                </td>
+
+                <td>
+
+                  <button
+                    type="button"
+                    mat-icon-button
+                    color="warn"
+                    (click)="eliminarItem(i)">
+
+                    <mat-icon>
+                      delete
+                    </mat-icon>
+
+                  </button>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <!-- RESUMEN -->
+      <mat-card class="mt resumen">
+
+        <mat-card-header>
+          <mat-card-title>
+            Resumen de Venta
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <div class="resumen-row">
+
+            <span>Subtotal</span>
+
+            <strong>
+              S/ {{ subtotal | number:'1.2-2' }}
+            </strong>
+
+          </div>
+
+          <div class="resumen-row">
+
+            <span>IGV (18%)</span>
+
+            <strong>
+              S/ {{ igv | number:'1.2-2' }}
+            </strong>
+
+          </div>
+
+          <hr>
+
+          <div class="resumen-total">
+
+            <span>Total</span>
+
+            <strong>
+              S/ {{ total | number:'1.2-2' }}
+            </strong>
+
+          </div>
+          
+          <mat-card-header>
+
+          <mat-card-title>
+            <button mat-flat-button color="primary"
+                (click)="guardarVenta()"
+                type="button">
+                Registrar Venta
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+
+        </mat-card-content>
+
+      </mat-card>
+
+    </div>
+
+  </div>
+
+</form>
