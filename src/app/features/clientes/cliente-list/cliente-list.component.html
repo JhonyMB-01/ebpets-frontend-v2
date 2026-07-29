@@ -1,0 +1,206 @@
+<div class="providers-page">
+
+  <!-- PAGE HEADER -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <div class="title-section">
+
+        <h1 class="page-title">
+          Clientes
+        </h1>
+
+        <p class="page-subtitle">
+          Gestiona los clientes registrados
+        </p>
+
+      </div>
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="new-btn"
+        (click)="nuevoCliente()"
+      >
+
+        <mat-icon>add</mat-icon>
+        Nuevo Cliente
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- LOADING -->
+
+  <div *ngIf="loading" class="loading-state">
+
+    <mat-spinner diameter="40"></mat-spinner>
+
+    <span>
+      Cargando clientes...
+    </span>
+
+  </div>
+
+  <!-- TABLE -->
+
+  <mat-card
+    *ngIf="!loading"
+    class="table-card"
+  >
+
+    <div class="table-wrapper">
+
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="providers-table"
+      >
+
+        <!-- Nombre -->
+
+        <ng-container matColumnDef="nombre">
+
+          <th mat-header-cell *matHeaderCellDef>
+            Nombre
+          </th>
+
+          <td mat-cell *matCellDef="let p">
+
+            <div class="provider-cell">
+
+              <div class="provider-avatar">
+                {{ p.nombre.charAt(0) }}
+              </div>
+
+              <span class="provider-name">
+                {{ p.nombre }}
+              </span>
+
+            </div>
+
+          </td>
+
+        </ng-container>
+
+        <!-- DOCUMENTO -->
+
+        <ng-container matColumnDef="documento">
+
+          <th mat-header-cell *matHeaderCellDef>
+            Documento
+          </th>
+
+          <td mat-cell *matCellDef="let p">
+
+            <span class="ruc-chip">
+              {{ p.documento }}
+            </span>
+
+          </td>
+
+        </ng-container>
+
+        <!-- TELEFONO -->
+
+        <ng-container matColumnDef="telefono">
+
+          <th mat-header-cell *matHeaderCellDef>
+            Teléfono
+          </th>
+
+          <td mat-cell *matCellDef="let p">
+            {{ p.telefono }}
+          </td>
+
+        </ng-container>
+
+        <!-- EMAIL -->
+
+        <ng-container matColumnDef="email">
+
+          <th mat-header-cell *matHeaderCellDef>
+            Email
+          </th>
+
+          <td mat-cell *matCellDef="let p">
+
+            <span class="email-text">
+              {{ p.email }}
+            </span>
+
+          </td>
+
+        </ng-container>
+
+        <!-- ACTIONS -->
+
+        <ng-container matColumnDef="acciones">
+
+          <th mat-header-cell *matHeaderCellDef>
+            Acciones
+          </th>
+
+          <td mat-cell *matCellDef="let p">
+
+            <button
+              mat-icon-button
+              class="action-btn"
+              (click)="editarCliente(p)"
+              matTooltip="Editar cliente"
+            >
+
+              <mat-icon>
+                edit
+              </mat-icon>
+
+            </button>
+
+          </td>
+
+        </ng-container>
+
+        <!-- ROWS -->
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns"
+        ></tr>
+
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns;"
+        ></tr>
+
+      </table>
+
+      <!-- EMPTY STATE -->
+
+      <div
+        *ngIf="dataSource.data.length === 0"
+        class="empty-state"
+      >
+
+        <mat-icon>
+          inventory_2
+        </mat-icon>
+
+        <h3>
+          No hay clientes
+        </h3>
+
+        <p>
+          Agrega tu primer cliente para comenzar
+        </p>
+
+      </div>
+
+    </div>
+
+  </mat-card>
+
+</div>

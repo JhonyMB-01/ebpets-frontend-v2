@@ -119,6 +119,24 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/ventas/venta-form/venta-form.component')
             .then(m => m.VentaFormComponent)
+      },
+      {
+        path: 'clientes',
+        loadComponent: () =>
+          import('./features/clientes/cliente-list/cliente-list.component')
+            .then(m => m.ClienteListComponent)
+      },
+      {
+        path: 'clientes/nuevo',
+        loadComponent: () =>
+          import('./features/clientes/cliente-form/cliente-form.component')
+            .then(m => m.ClienteFormComponent)
+      },
+      {
+        path: 'clientes/:id',
+        loadComponent: () =>
+          import('./features/clientes/cliente-form/cliente-form.component')
+            .then(m => m.ClienteFormComponent)
       }
 
 

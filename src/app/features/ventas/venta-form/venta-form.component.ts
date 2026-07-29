@@ -5,18 +5,10 @@ import { FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { Producto } from '../../../core/models/producto.model';
 import { ProductoService } from '../../productos/producto.service';
+import { ClienteService } from '../../clientes/cliente.service';
+import { Cliente } from '../../../core/models/cliente.model';
+import { InventarioService } from '../../../core/services/inventario.service';
 
-
-interface Cliente {
-  id: number;
-  nombre: string;
-}
-
-/*interface Producto {
-  id: number;
-  nombre: string;
-  precioVenta: number;
-}*/
 
 interface Inventario {
   id: number;
@@ -51,18 +43,13 @@ export class VentaFormComponent {
 
   private fb = inject(FormBuilder);
   private productoService = inject(ProductoService);
+  private clienteService = inject(ClienteService);
+  private inventarioService = inject(InventarioService)
 
   productos: Producto[] = [];
 
-  clientes: Cliente[] = [
-    { id: 1, nombre: 'Cliente General' },
-    { id: 2, nombre: 'Maria Lopez' }
-  ];
+  clientes: Cliente[] = [];
 
-  /*productos: Producto[] = [
-    { id: 1, nombre: 'Alimento perro 10kg', precioVenta: 120 },
-    { id: 2, nombre: 'Medicamento mascota', precioVenta: 50 }
-  ];*/
 
   inventariosPorProducto: Record<number, Inventario[]> = {
     1: [
@@ -140,14 +127,22 @@ export class VentaFormComponent {
   });
 
    ngOnInit(): void {
-    console.log('Cargando productos...');
+    console.log('Cargando productos, clietes...');
     this.cargarProductos();
+    this.cargarClientes();
   }
 
    cargarProductos(): void {
     this.productoService.getProductos().subscribe(data => {
       this.productos = [...data];
       console.log('Productos cargados:', this.productos);
+    });
+  }
+
+  cargarClientes(): void {
+    this.clienteService.getClientes().subscribe(data => {
+      this.clientes = [...data];
+      console.log('clientes cargados:', this.clientes);
     });
   }
 
