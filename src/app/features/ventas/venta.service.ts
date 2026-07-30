@@ -17,9 +17,13 @@ export class VentaService {
   }
 
   
-getVentaById(id: number) {
-  return this.http.get<VentaDetalle>(`${this.API_URL}/${id}`);
-}
+  getVentaById(id: number) {
+    return this.http.get<VentaDetalle>(`${this.API_URL}/${id}`);
+  }
+
+  saveVenta(data: any) {
+    return this.http.post<Venta>(this.API_URL, data);
+  }
 
 
 }

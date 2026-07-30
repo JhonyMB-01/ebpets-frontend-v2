@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { MaterialModule } from '../../../shared/material/material.module';
 import { Producto } from '../../../core/models/producto.model';
@@ -8,14 +9,16 @@ import { ProductoService } from '../../productos/producto.service';
 import { ClienteService } from '../../clientes/cliente.service';
 import { Cliente } from '../../../core/models/cliente.model';
 import { InventarioService } from '../../../core/services/inventario.service';
+import { Inventario } from '../../../core/models/inventario.model';
+import { VentaService } from '../venta.service';
 
 
-interface Inventario {
+/*interface Inventario {
   id: number;
   lote: string;
   stock: number;
   fechaVencimiento: string;
-}
+}*/ 
 
 interface VentaItem {
   idProducto: number;
@@ -26,7 +29,7 @@ interface VentaItem {
   precioUnitario: number;
   descuento: number;
   total: number;
-}
+} 
 
 @Component({
   selector: 'app-venta-form',
@@ -44,37 +47,13 @@ export class VentaFormComponent {
   private fb = inject(FormBuilder);
   private productoService = inject(ProductoService);
   private clienteService = inject(ClienteService);
-  private inventarioService = inject(InventarioService)
+  private inventarioService = inject(InventarioService);
+  private ventaService = inject(VentaService);
+  private router = inject(Router);
 
   productos: Producto[] = [];
 
   clientes: Cliente[] = [];
-
-
-  inventariosPorProducto: Record<number, Inventario[]> = {
-    1: [
-      {
-        id: 10,
-        lote: 'L001',
-        stock: 50,
-        fechaVencimiento: '2026-07-10'
-      },
-      {
-        id: 11,
-        lote: 'L002',
-        stock: 30,
-        fechaVencimiento: '2027-01-01'
-      }
-    ],
-    2: [
-      {
-        id: 20,
-        lote: 'Farmacos',
-        stock: 10,
-        fechaVencimiento: '2027-06-20'
-      }
-    ]
-  };
 
   inventarios: Inventario[] = [];
 
@@ -127,7 +106,7 @@ export class VentaFormComponent {
   });
 
    ngOnInit(): void {
-    console.log('Cargando productos, clietes...');
+    console.log('Cargando productos, clientes...');
     this.cargarProductos();
     this.cargarClientes();
   }
@@ -147,7 +126,6 @@ export class VentaFormComponent {
   }
 
   buscarProducto(event: Event): void {
-
     const value =
       (event.target as HTMLInputElement)
         .value
@@ -168,7 +146,9 @@ export class VentaFormComponent {
       precioUnitario: producto.precioVenta
     });
 
-    this.inventarios =
+     // Cargar inventarios desde el endpoint
+
+    /*this.inventarios =
       this.inventariosPorProducto[producto.id] || [];
 
     const primerLote =
@@ -180,7 +160,33 @@ export class VentaFormComponent {
 
     this.filteredProductos = [];
 
-    this.actualizarStock();
+    this.actualizarStock();*/
+
+    this.inventarioService.getInventarioByIdProducto(producto.id)
+            .subscribe({
+                next: (data) => {
+                    this.inventarios = data.map(d => ({
+                        id: d.id,
+                        lote: d.lote ?? '',
+                        stock: d.stock,
+                        fechaVencimiento: d.fechaVencimiento ?? '',
+                        nombreProducto: d.nombreProducto ?? '',
+                        stockMinimo: d.stockMinimo
+                    }));
+
+                    const primerLote = this.inventarios[0];
+                    this.form.patchValue({
+                        idInventario: primerLote?.id ?? null
+                    });
+                    this.filteredProductos = [];
+                    this.actualizarStock();
+                },
+                error: (err) => {
+                    console.error('Error cargando inventarios:', err);
+                    this.inventarios = [];
+                }
+            });
+
   }
 
   seleccionarInventario(): void {
@@ -323,6 +329,9 @@ export class VentaFormComponent {
     };
 
     console.log('VENTA FINAL:', venta);
+
+    this.ventaService.saveVenta(venta)
+        .subscribe(() => this.router.navigate(['/ventas']));
 
     alert('Venta registrada correctamente');
 

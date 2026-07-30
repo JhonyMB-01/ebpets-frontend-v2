@@ -16,4 +16,8 @@ export class InventarioService {
     return this.http.get<Inventario[]>(this.API_URL);
   }
 
+  getInventarioByIdProducto(id: number): Observable<Inventario[]> {
+    return this.http.get<Inventario[]>(`${this.API_URL}/producto/${id}`);
+  }
+
 }
