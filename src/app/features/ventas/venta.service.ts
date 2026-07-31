@@ -25,5 +25,9 @@ export class VentaService {
     return this.http.post<Venta>(this.API_URL, data);
   }
 
+  confirmarPago(id: number) {
+    return this.http.patch(`${this.API_URL}/${id}/confirmar`, {});
+  }
+
 
 }

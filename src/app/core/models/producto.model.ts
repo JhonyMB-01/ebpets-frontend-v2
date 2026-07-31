@@ -5,9 +5,9 @@ export interface Producto {
   precioVenta: number;
   afectaIgv: boolean;
   activo: boolean;
-
   marca: Marca;
   categoria: Categoria;
+  tieneInventario: boolean;
   
 }
 

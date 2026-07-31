@@ -13,13 +13,6 @@ import { Inventario } from '../../../core/models/inventario.model';
 import { VentaService } from '../venta.service';
 
 
-/*interface Inventario {
-  id: number;
-  lote: string;
-  stock: number;
-  fechaVencimiento: string;
-}*/ 
-
 interface VentaItem {
   idProducto: number;
   idInventario: number;
@@ -112,7 +105,7 @@ export class VentaFormComponent {
   }
 
    cargarProductos(): void {
-    this.productoService.getProductos().subscribe(data => {
+    this.productoService.getProductosWithStock().subscribe(data => {
       this.productos = [...data];
       console.log('Productos cargados:', this.productos);
     });
@@ -147,20 +140,6 @@ export class VentaFormComponent {
     });
 
      // Cargar inventarios desde el endpoint
-
-    /*this.inventarios =
-      this.inventariosPorProducto[producto.id] || [];
-
-    const primerLote =
-      this.inventarios[0];
-
-    this.form.patchValue({
-      idInventario: primerLote?.id ?? null
-    });
-
-    this.filteredProductos = [];
-
-    this.actualizarStock();*/
 
     this.inventarioService.getInventarioByIdProducto(producto.id)
             .subscribe({
@@ -345,6 +324,15 @@ export class VentaFormComponent {
     this.inventarios = [];
     this.filteredProductos = [];
   }
-}
+
+  cancelar(): void {
+    console.log('Cancelar venta');
+    if (this.form.dirty || this.items.length > 0) {
+      const confirmacion = confirm('¿Desea salir sin guardar los cambios?');
+      if (!confirmacion) return;
+    }
+    this.router.navigate(['/ventas']);
+  }
 
 
+ }

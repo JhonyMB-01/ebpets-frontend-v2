@@ -63,7 +63,7 @@ export class CategoriaListComponent implements OnInit {
   eliminar(c: Categoria) {
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+      width: '400px',
       data: {
         mensaje: `¿Desea eliminar la categoría "${c.nombre}"?`
       }

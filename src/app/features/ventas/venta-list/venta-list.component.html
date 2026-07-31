@@ -95,6 +95,9 @@
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
 
           <td mat-cell *matCellDef="let v">
+            <div class="actions-container">
+
+           <!-- VER DETALLE -->
 
             <button
               mat-icon-button
@@ -104,6 +107,20 @@
               <mat-icon>visibility</mat-icon>
 
             </button>
+
+            <!-- APROBAR PAGO -->
+
+              <button
+              *ngIf="v.estado === 'PENDIENTE'"
+              mat-icon-button
+              class="action-btn approve-btn"
+              matTooltip="Aprobar pago"
+              (click)="aprobarPago(v.id)"
+            >
+              <mat-icon>check_circle</mat-icon>
+            </button>
+
+             </div>
 
           </td>
         </ng-container>

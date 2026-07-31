@@ -10,6 +10,7 @@ import { VentaService } from '../venta.service';
 import { Venta } from '../../../core/models/venta.model';
 
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../shared/dialogs/confirm-dialog/confirm-dialog';
 import { VentaDetailDialogComponent } from '../venta-detail-dialog/venta-detail-dialog.component';
 
 
@@ -57,6 +58,35 @@ export class VentaListComponent implements OnInit {
   
   nuevaVenta(): void {
     this.router.navigate(['/ventas/nuevo']);
+  }
+
+  aprobarPago(id: number): void {
+    console.log('Aprobar pago venta con ID', id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+          width: '400px',
+          data: {
+            mensaje: `¿Desea aprobar el pago de la venta?`
+          }
+        });
+    
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Lógica para aprobar el pago
+        console.log('Pago aprobado para la venta con ID', id);
+        this.service.confirmarPago(id).subscribe({
+          next: () => {
+            console.log('Pago confirmado en el backend');
+            // Refrescar la lista de ventas después de aprobar el pago
+            this.cargar();
+          }
+        });
+      } else {
+        console.log('Aprobación de pago cancelada');
+      } 
+    });
+
+    
+        
   }
 
   

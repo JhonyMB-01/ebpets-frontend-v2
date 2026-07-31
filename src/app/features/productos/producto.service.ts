@@ -29,5 +29,9 @@ export class ProductoService {
     return this.http.put(`${this.API_URL}/${id}`, data);
   }
 
+  getProductosWithStock(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.API_URL}/con-stock`);
+  }
+
 
 }

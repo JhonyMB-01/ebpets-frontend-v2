@@ -209,6 +209,7 @@
           </div>
 
           <!-- BOTON -->
+    
           <button
             type="button"
             mat-flat-button
@@ -219,6 +220,19 @@
             Agregar Producto
 
           </button>
+
+          <button
+            mat-stroked-button
+            type="button"
+            class="cancel-btn"
+            (click)="cancelar()"          
+          >
+
+            <mat-icon>close</mat-icon>
+            Cancelar
+
+          </button>
+       
 
         </mat-card-content>
 
