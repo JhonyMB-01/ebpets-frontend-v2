@@ -107,14 +107,12 @@ export class VentaFormComponent {
    cargarProductos(): void {
     this.productoService.getProductosWithStock().subscribe(data => {
       this.productos = [...data];
-      console.log('Productos cargados:', this.productos);
     });
   }
 
   cargarClientes(): void {
     this.clienteService.getClientes().subscribe(data => {
       this.clientes = [...data];
-      console.log('clientes cargados:', this.clientes);
     });
   }
 

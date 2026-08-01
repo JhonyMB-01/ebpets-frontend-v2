@@ -36,17 +36,24 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Cantidad</mat-label>
-          <input matInput type="number" formControlName="cantidad">
+          <input matInput
+            formControlName="cantidad"
+            appInputFilter="numbers">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Precio</mat-label>
-          <input matInput type="number" formControlName="precioCompra">
+          <input matInput
+           formControlName="precioCompra"
+           appInputFilter="precio">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Lote</mat-label>
-          <input matInput formControlName="lote">
+          <input matInput 
+          formControlName="lote"
+          appInputFilter="lote"
+          >
         </mat-form-field>
 
         <mat-form-field appearance="outline">

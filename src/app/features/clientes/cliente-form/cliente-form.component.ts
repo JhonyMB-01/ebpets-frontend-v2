@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../../../core/models/cliente.model';
+import { InputFilterDirective } from '../../../shared/directives/input-filter.directive';
 
 @Component({
   selector: 'app-cliente-form',
@@ -14,7 +15,8 @@ import { Cliente } from '../../../core/models/cliente.model';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    InputFilterDirective
   ],
   templateUrl: './cliente-form.component.html',
   styleUrl: './cliente-form.component.css'

@@ -37,10 +37,8 @@ export class MarcaListComponent  implements OnInit {
   cargar() {
     this.marcaService.getMarcas().subscribe({
       next: (data) => {
-        console.log('Marcas cargadas:', data);
         this.dataSource = new MatTableDataSource(data);
         this.loading = false;
-        console.log(this.loading);
       }, error: (err) => {
         console.error('Error al cargar marcas', err);
         this.loading = false;

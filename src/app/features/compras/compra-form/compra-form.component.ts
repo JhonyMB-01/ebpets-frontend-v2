@@ -10,13 +10,16 @@ import { Producto } from '../../../core/models/producto.model';
 import { CompraService } from '../compra.service';
 import { ProveedorService } from '../../proveedores/proveedor.service';
 import { ProductoService } from '../../productos/producto.service';
+import { InputFilterDirective } from '../../../shared/directives/input-filter.directive';
+
 
 @Component({
   selector: 'app-compra-form',
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    InputFilterDirective
   ],
   templateUrl: './compra-form.component.html',
   styleUrls: ['./compra-form.component.css']

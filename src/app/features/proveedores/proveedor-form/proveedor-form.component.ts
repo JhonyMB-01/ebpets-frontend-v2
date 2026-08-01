@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { ProveedorService } from '../proveedor.service';
 import { Proveedor } from '../../../core/models/proveedor.model';
+import { InputFilterDirective } from '../../../shared/directives/input-filter.directive';
 
 @Component({
   selector: 'app-proveedor-form',
@@ -14,7 +15,8 @@ import { Proveedor } from '../../../core/models/proveedor.model';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    InputFilterDirective
   ],
   templateUrl: './proveedor-form.component.html',
   styleUrl: './proveedor-form.component.css'
@@ -79,5 +81,20 @@ export class ProveedorFormComponent implements OnInit {
     } 
     this.router.navigate(['/proveedores']);
   }
+
+  validarNombre(): void {
+  const control = this.form.get('nombre');
+
+  if (!control) {
+    return;
+  }
+
+  const valor = control.value ?? '';
+
+  control.setValue(
+    valor.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, ''),
+    { emitEvent: false }
+  );
+}
     
 }

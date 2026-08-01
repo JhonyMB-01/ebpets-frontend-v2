@@ -7,11 +7,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { CategoriaService } from '../categoria.service';
 import { Categoria } from '../../../core/models/categoria.model';
+import { InputFilterDirective } from '../../../shared/directives/input-filter.directive';
 
 @Component({
   selector: 'app-categoria-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+  imports: [CommonModule, ReactiveFormsModule, MaterialModule, InputFilterDirective],
   templateUrl: './categoria-form.html',
   styleUrls: ['./categoria-form.scss']
 })

@@ -7,11 +7,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { MarcaService } from '../marca.service';
 import { Marca } from '../../../core/models/marca.model';
+import { InputFilterDirective } from '../../../shared/directives/input-filter.directive';
 
 @Component({
   selector: 'app-marca-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+  imports: [CommonModule, ReactiveFormsModule, MaterialModule, InputFilterDirective],
   templateUrl: './marca-form.component.html',
   styleUrl: './marca-form.component.css'
 })

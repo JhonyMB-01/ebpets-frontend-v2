@@ -8,6 +8,7 @@ import { ProductoService } from '../producto.service';
 import { Producto, Categoria, Marca } from '../../../core/models/producto.model';
 import { MarcaService } from '../../marcas/marca.service';
 import { CategoriaService } from '../../categorias/categoria.service';
+import { InputFilterDirective } from '../../../shared/directives/input-filter.directive';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { CategoriaService } from '../../categorias/categoria.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    InputFilterDirective
   ],
   templateUrl: './producto-form.html',
   styleUrls: ['./producto-form.scss']

@@ -41,7 +41,6 @@ export class ClienteListComponent {
     this.loading = true;
     this.clienteService.getClientes().subscribe({
       next: (data) => {
-        console.error(data);
         this.dataSource = new MatTableDataSource(data);
         this.loading = false;
       },

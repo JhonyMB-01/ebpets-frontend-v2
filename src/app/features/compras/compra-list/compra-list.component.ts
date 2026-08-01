@@ -37,7 +37,6 @@ export class CompraListComponent implements OnInit{
 
 
   ngOnInit(): void {
-     console.log('Compras cargadas:', this.dataSource.data.length);
     this.cargar();
   }
 
@@ -45,10 +44,8 @@ export class CompraListComponent implements OnInit{
 cargar() {
     this.service.getCompras().subscribe({
         next: (data) => {
-          console.log('Compras cargadas:', data);
           this.dataSource = new MatTableDataSource(data);
           this.loading = false;
-          console.log(this.loading);
         },
         error: (error) => {
           console.error('Error al cargar compras', error);
