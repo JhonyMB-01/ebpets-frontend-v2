@@ -1,0 +1,144 @@
+<mat-card class="brand-form-card">
+
+  <!-- HEADER -->
+
+  <div class="card-header">
+
+    <div class="title-section">
+
+      <div class="icon-wrapper">
+
+        <mat-icon>
+          storefront
+        </mat-icon>
+
+      </div>
+
+      <div>
+
+        <h2 class="form-title">
+
+          {{
+            modoEdicion
+              ? 'Editar Rol'
+              : 'Nuevo Rol'
+          }}
+
+        </h2>
+
+        <p class="form-subtitle">
+          Gestiona la información del rol
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="guardar()"
+    class="brand-form"
+  >
+
+    <!-- SECTION -->
+
+    <div class="form-section">
+
+      <div class="section-header">
+
+        <h3 class="section-title">
+          Información Básica
+        </h3>
+
+        <span class="section-badge">
+          Obligatorio
+        </span>
+
+      </div>
+
+      <div class="form-grid">
+
+        <!-- NOMBRE -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Nombre
+          </mat-label>
+
+          <mat-icon matPrefix>
+            badge
+          </mat-icon>
+
+          <input
+            matInput
+            formControlName="nombre"
+            placeholder="Ingrese el nombre del rol"
+            appInputFilter="letters"
+          >
+
+          <mat-hint>
+            Ejemplo: Administrador, Usuario, etc.
+          </mat-hint>
+
+          <mat-error
+            *ngIf="
+              form.get('nombre')?.touched &&
+              form.get('nombre')?.invalid
+            "
+          >
+
+            El nombre es obligatorio
+
+          </mat-error>
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        class="save-btn"
+        [disabled]="form.invalid"
+      >
+
+        <mat-icon>
+          save
+        </mat-icon>
+
+        Guardar
+
+      </button>
+
+      <button
+        mat-stroked-button
+        type="button"
+        class="cancel-btn"
+        (click)="cancelar()"
+      >
+
+        <mat-icon>
+          close
+        </mat-icon>
+
+        Cancelar
+
+      </button>
+
+    </div>
+
+  </form>
+
+</mat-card>

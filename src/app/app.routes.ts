@@ -137,8 +137,25 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/clientes/cliente-form/cliente-form.component')
             .then(m => m.ClienteFormComponent)
+      },
+      {
+        path: 'roles',
+        loadComponent: () =>
+          import('./features/roles/rol-list/rol-list.component')
+            .then(m => m.RolListComponent)
+      },
+      {
+        path: 'roles/nuevo',
+        loadComponent: () =>
+          import('./features/roles/rol-form/rol-form.component')
+            .then(m => m.RolFormComponent)
+      },
+      {
+        path: 'roles/:id',
+        loadComponent: () =>
+          import('./features/roles/rol-form/rol-form.component')
+            .then(m => m.RolFormComponent)
       }
-
 
     ]
     }

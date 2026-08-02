@@ -66,7 +66,14 @@ export class MenuService {
       icon: 'people',
       route: '/proveedores',
       roles: ['Administrador']
+    },
+    {
+      label: 'Roles',
+      icon: 'security',
+      route: '/roles',
+      roles: ['Administrador']
     }
+    
   ];
 
   getMenuByRole(role: string): MenuItem[] {
