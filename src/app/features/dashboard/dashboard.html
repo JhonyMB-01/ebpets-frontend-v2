@@ -1,15 +1,183 @@
+@if (loading) {
+
+<div class="loading">
+    Cargando dashboard...
+</div>
+
+}
+
+@if (dashboard) {
+
 <div class="dashboard">
 
-  <header class="dashboard-header">
-    <h1>Dashboard</h1>
-    <p>Resumen general del sistema</p>
-  </header>
+    <header class="header">
 
-  <section class="metrics-grid">
-    <app-metric-card
-      *ngFor="let metric of metrics"
-      [metric]="metric">
-    </app-metric-card>
-  </section>
+        <div>
+            <h2>Dashboard</h2>
+            <span>Resumen general del sistema</span>
+        </div>
+
+        <button (click)="cargar()">
+            🔄 Actualizar
+        </button>
+
+    </header>
+
+
+    <section class="cards">
+
+        <div class="card">
+            <span>💰</span>
+            <label>Ventas Hoy</label>
+            <strong>{{ formatMoney(dashboard.kpis.ventasHoy) }}</strong>
+        </div>
+
+        <div class="card">
+            <span>📈</span>
+            <label>Ventas Mes</label>
+            <strong>{{ formatMoney(dashboard.kpis.ventasMes) }}</strong>
+        </div>
+
+        <div class="card">
+            <span>🛒</span>
+            <label>Compras Mes</label>
+            <strong>{{ formatMoney(dashboard.kpis.comprasMes) }}</strong>
+        </div>
+
+        <div class="card">
+            <span>💵</span>
+            <label>Ticket Promedio</label>
+            <strong>{{ formatMoney(dashboard.kpis.ticketPromedio) }}</strong>
+        </div>
+
+        <div class="card">
+            <span>👥</span>
+            <label>Clientes</label>
+            <strong>{{ dashboard.kpis.clientes }}</strong>
+        </div>
+
+        <div class="card">
+            <span>📦</span>
+            <label>Productos</label>
+            <strong>{{ dashboard.kpis.productos }}</strong>
+        </div>
+
+        <div class="card">
+            <span>⚠️</span>
+            <label>Stock Bajo</label>
+            <strong>{{ dashboard.kpis.stockBajo }}</strong>
+        </div>
+
+        <div class="card">
+            <span>❌</span>
+            <label>Sin Stock</label>
+            <strong>{{ dashboard.kpis.sinStock }}</strong>
+        </div>
+
+    </section>
+
+
+    <div class="grid">
+
+        <section class="panel">
+
+            <h3>Productos sin stock</h3>
+
+            <table>
+
+                <thead>
+
+                <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Stock</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                @for (item of dashboard.productosSinStock; track item.idProducto) {
+
+                <tr>
+
+                    <td>{{ item.codigo }}</td>
+                    <td>{{ item.producto }}</td>
+                    <td>{{ item.stock }}</td>
+
+                </tr>
+
+                }
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <section class="panel">
+
+            <h3>Indicadores</h3>
+
+            <ul>
+
+                <li>Ventas realizadas hoy: {{ dashboard.kpis.ventasHoyCantidad }}</li>
+
+                <li>Productos por vencer: {{ dashboard.kpis.productosPorVencer }}</li>
+
+                <li>Stock bajo: {{ dashboard.kpis.stockBajo }}</li>
+
+                <li>Sin stock: {{ dashboard.kpis.sinStock }}</li>
+
+            </ul>
+
+        </section>
+
+    </div>
+
+
+    <section class="panel">
+
+        <h3>Últimas ventas</h3>
+
+        <table>
+
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Total</th>
+                <th>Fecha</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            @for (venta of dashboard.ultimasVentas; track venta.idVenta) {
+
+            <tr>
+
+                <td>{{ venta.idVenta }}</td>
+
+                <td>{{ venta.cliente }}</td>
+
+                <td>{{ formatMoney(venta.total) }}</td>
+
+                <td>{{ formatDate(venta.fecha) }}</td>
+
+            </tr>
+
+            }
+
+            </tbody>
+
+        </table>
+
+    </section>
 
 </div>
+
+}
