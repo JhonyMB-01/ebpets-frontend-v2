@@ -155,6 +155,24 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/roles/rol-form/rol-form.component')
             .then(m => m.RolFormComponent)
+      },
+      {
+        path: 'usuarios',
+        loadComponent: () =>
+          import('./features/usuarios/usuarios-list/usuarios-list.component')
+            .then(m => m.UsuariosListComponent)
+      },
+      {
+        path: 'usuarios/nuevo',
+        loadComponent: () =>
+          import('./features/usuarios/usuarios-form/usuarios-form.component')
+            .then(m => m.UsuariosFormComponent)
+      },
+      {
+        path: 'usuarios/:id',
+        loadComponent: () =>
+          import('./features/usuarios/usuarios-form/usuarios-form.component')
+            .then(m => m.UsuariosFormComponent)
       }
 
     ]

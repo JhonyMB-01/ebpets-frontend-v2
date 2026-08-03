@@ -1,0 +1,225 @@
+<mat-card class="product-form-card">
+
+  <!-- HEADER -->
+
+  <div class="card-header">
+
+    <div class="title-section">
+
+      <div class="icon-wrapper">
+
+        <mat-icon>
+          users
+        </mat-icon>
+
+      </div>
+
+      <div>
+
+        <h2 class="form-title">
+          {{ modoEdicion ? 'Editar Usuario' : 'Nuevo Usuario' }}
+        </h2>
+
+        <p class="form-subtitle">
+          Gestiona la información del usuario
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="guardar()"
+    class="product-form"
+  >
+
+    <!-- SECTION -->
+    <div class="form-section">
+
+      <h3 class="section-title">
+        Información General
+      </h3>
+
+      <div class="form-grid">
+
+        <!-- NOMBRE -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Nombre usuario</mat-label>
+
+          <mat-icon matPrefix>
+            person
+          </mat-icon>
+
+          <input
+            matInput
+            formControlName="nombre"
+            placeholder="Ingrese el nombre"
+            appInputFilter="letters"
+          >
+
+        </mat-form-field>
+
+        <!-- USRNAME -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Username</mat-label>
+
+          <mat-icon matPrefix>
+            account_circle
+          </mat-icon>
+
+          <input
+            matInput
+            formControlName="username"
+            placeholder="Ingrese el nombre de usuario"
+            appInputFilter="alphanumeric"
+          >
+
+        </mat-form-field>
+
+        <!-- PASSWORD -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Contraseña</mat-label>
+
+          <mat-icon matPrefix>
+            password
+          </mat-icon>
+
+            <input
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="password"
+                placeholder="Ingrese la contraseña"
+                appInputFilter="alphanumeric"
+            />
+
+            <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="hidePassword ? 'Mostrar contraseña' : 'Ocultar contraseña'"
+            >
+                <mat-icon>
+                {{ hidePassword ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+            </button>
+
+        </mat-form-field>
+
+        <!-- ROL -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Rol</mat-label>
+
+          <mat-icon matPrefix>
+            security
+          </mat-icon>
+
+          <mat-select formControlName="rol">
+
+            <mat-option
+              *ngFor="let r of roles"
+              [value]="r.id"      
+            >
+              {{ r.nombre }}
+            </mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <!-- SECTION -->
+
+    <div class="form-section">
+
+      <h3 class="section-title">
+        Configuración
+      </h3>
+
+      <div class="toggles-grid">
+
+        <!-- ACTIVO -->
+
+        <div class="toggle-card">
+
+          <div class="toggle-info">
+
+            <span class="toggle-title">
+              Usuario Activo
+            </span>
+
+            <span class="toggle-description">
+              Visible y disponible en el sistema
+            </span>
+
+          </div>
+
+          <mat-slide-toggle
+            color="primary"
+            formControlName="activo"
+          >
+          </mat-slide-toggle>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        class="save-btn"
+        [disabled]="form.invalid"
+      >
+
+        <mat-icon>
+          save
+        </mat-icon>
+
+        Guardar
+
+      </button>
+
+      <button
+        mat-stroked-button
+        type="button"
+        class="cancel-btn"
+        (click)="cancelar()"
+      >
+
+        <mat-icon>
+          close
+        </mat-icon>
+
+        Cancelar
+
+      </button>
+
+    </div>
+
+  </form>
+
+</mat-card>
