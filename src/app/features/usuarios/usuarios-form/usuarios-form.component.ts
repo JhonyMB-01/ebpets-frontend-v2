@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 import { MaterialModule } from '../../../shared/material/material.module';
 import { UsuarioService } from '../usuario.service';
@@ -24,7 +25,7 @@ export class UsuariosFormComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private usuarioService = inject(UsuarioService);
   private snackBar = inject(MatSnackBar);
-  private rolService = inject(RolService);
+  private rolService = inject(RolService); 
 
   hidePassword = true;
   
@@ -36,8 +37,8 @@ export class UsuariosFormComponent implements OnInit {
   form = this.fb.group({
     nombre: ['', Validators.required],
     username: ['', Validators.required],
-    password: ['', Validators.required],
-    rolId: [null as number | null, Validators.required],
+    password: [''],
+    idRol: [null as number | null, Validators.required],
     activo: [true]
   });
 
@@ -47,8 +48,15 @@ export class UsuariosFormComponent implements OnInit {
     if (id) {
       this.userId = +id;
       this.modoEdicion = true;
-    }
 
+      // En edición la contraseña es opcional
+      this.form.get('password')?.clearValidators();
+    } else {
+      // En creación la contraseña es obligatoria
+      this.form.get('password')?.setValidators([Validators.required]);
+  }
+
+    this.form.get('password')?.updateValueAndValidity();
     this.cargarCatalogos();
   }
 
@@ -78,8 +86,9 @@ export class UsuariosFormComponent implements OnInit {
               this.form.patchValue({
                 nombre: usuario.nombre,
                 username: usuario.username,
-                rolId: usuario.rol?.id ?? null,
-                activo: usuario.activo
+                idRol: usuario.rol?.id ?? null,
+                activo: usuario.activo,
+                password: usuario.password // No se carga la contraseña por seguridad
               });
     
             },
@@ -98,7 +107,7 @@ export class UsuariosFormComponent implements OnInit {
       nombre: this.form.value.nombre,
       username: this.form.value.username,
       password: this.form.value.password,
-      rolId: this.form.value.rolId,
+      idRol: this.form.value.idRol,
       activo: this.form.value.activo
     }
 
@@ -109,16 +118,36 @@ export class UsuariosFormComponent implements OnInit {
         next: (dto) => {
           this.snackBar.open('Usuario actualizado correctamente', 'Cerrar', { duration: 3000 });
           this.router.navigate(['/usuarios']);
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al actualizar usuario',
+            text: err.error?.message || 'Ocurrió un error inesperado.',
+            confirmButtonText: 'Aceptar'
+          });
         }
       });
     } else {
       // Crear nuevo usuario
       console.log('Crear usuario', dto);
       this.usuarioService.createUsuario(dto).subscribe({
-        next: (dto) => {
-          this.snackBar.open('Usuario creado correctamente', 'Cerrar', { duration: 3000 }); 
-          this.router.navigate(['/usuarios']);
-        }
+        next: () => {
+          this.snackBar.open(
+            'Usuario creado correctamente',
+            'Cerrar',
+            { duration: 3000 }
+          );
+        this.router.navigate(['/usuarios']);
+      },
+      error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al crear usuario',
+              text: err.error?.message || 'Ocurrió un error inesperado.',
+              confirmButtonText: 'Aceptar'
+            });
+          }
       });
     }
    }

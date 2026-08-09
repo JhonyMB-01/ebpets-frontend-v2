@@ -33,7 +33,6 @@ export class InputFilterDirective {
 
     // Quitar caracteres no permitidos
     value = value.replace(filter.regex, '');
-    console.log('Valor filtrado:', value + " filtro: " + filter.maxLength + " regex: " + filter.regex);
 
     // Aplicar transformación personalizada
     if (filter.transform) {
